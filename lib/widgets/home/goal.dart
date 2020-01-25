@@ -8,22 +8,24 @@ class Goal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              title,
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ),
-            Text(
-              description,
-              style: TextStyle(fontSize: 12),
-            ),
-          ],
-        ),
-      ],
+    return Container(
+      child: Row(
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                title,
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              Text(
+                description,
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

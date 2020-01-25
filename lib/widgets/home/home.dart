@@ -32,8 +32,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           child: Column(
             children: <Widget>[
               Header(),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              Expanded(
                 child: GoalsList(),
               ),
             ],
