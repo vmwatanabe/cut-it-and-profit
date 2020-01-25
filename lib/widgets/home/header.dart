@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Header extends StatefulWidget {
+  final Function onAddClick;
+
+  Header({this.onAddClick});
+
   @override
   _HeaderState createState() => _HeaderState();
 }
@@ -21,10 +25,11 @@ class _HeaderState extends State<Header> {
               fontSize: 24,
             ),
           ),
-          Icon(
-            Icons.add,
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: widget.onAddClick,
             color: Colors.white,
-            size: 24,
+            iconSize: 24,
           )
         ],
       ),
