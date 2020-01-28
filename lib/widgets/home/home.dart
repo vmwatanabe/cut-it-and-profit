@@ -7,34 +7,83 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+class _HomeState extends State<Home> {
+  TextEditingController _newGoalName;
+  TextEditingController _newGoalValue;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
+    _newGoalName = TextEditingController();
+    _newGoalValue = TextEditingController();
   }
 
   @override
   void dispose() {
+    _newGoalName.dispose();
+    _newGoalValue.dispose();
     super.dispose();
-    _controller.dispose();
   }
 
-  void _showDialog() {
-    showDialog(
+  Future<void> _showDialog() async {
+    switch (await showDialog(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-              title: const Text('Select assignment'),
+              title: const Text('Create a new Goal'),
               children: <Widget>[
                 Container(
-                  height: 50,
-                  color: Colors.red[300],
-                )
+                    color: Colors.red[300],
+                    child: Column(
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Text('Goal\'s name'),
+                            TextField(
+                                controller: _newGoalName,
+                                decoration: InputDecoration(
+                                    labelText: 'Type your goal\'s name')),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const Text('Unitary value'),
+                            TextField(
+                                controller: _newGoalValue,
+                                decoration: InputDecoration(
+                                    labelText:
+                                        'Type your goal\'s unitary value')),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context, false);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.pop(context, true);
+                              },
+                              child: const Text('Confirm'),
+                            ),
+                          ],
+                        )
+                      ],
+                    ))
               ]);
-        });
+        })) {
+      case true:
+        print('true');
+        break;
+      case false:
+        print('false');
+        break;
+    }
   }
 
   @override
