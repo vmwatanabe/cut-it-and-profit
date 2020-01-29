@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _showDialog() async {
-    switch (await showDialog(
+    var dialogResponse = await showDialog(
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
@@ -41,9 +41,12 @@ class _HomeState extends State<Home> {
                           children: <Widget>[
                             const Text('Goal\'s name'),
                             TextField(
-                                controller: _newGoalName,
-                                decoration: InputDecoration(
-                                    labelText: 'Type your goal\'s name')),
+                              controller: _newGoalName,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Type your goal\'s name',
+                              ),
+                            ),
                           ],
                         ),
                         Column(
@@ -51,13 +54,16 @@ class _HomeState extends State<Home> {
                           children: <Widget>[
                             const Text('Unitary value'),
                             TextField(
-                                controller: _newGoalValue,
-                                decoration: InputDecoration(
-                                    labelText:
-                                        'Type your goal\'s unitary value')),
+                              controller: _newGoalValue,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                labelText: 'Type your goal\'s unitary value',
+                              ),
+                            ),
                           ],
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             FlatButton(
                               onPressed: () {
@@ -76,12 +82,15 @@ class _HomeState extends State<Home> {
                       ],
                     ))
               ]);
-        })) {
+        });
+    switch (dialogResponse) {
       case true:
         print('true');
         break;
-      case false:
-        print('false');
+      default:
+        print(dialogResponse);
+        _newGoalName.clear();
+        _newGoalValue.clear();
         break;
     }
   }
